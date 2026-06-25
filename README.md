@@ -18,6 +18,6 @@ A cross-platform mobile application built with Flutter that helps users track th
 - **Notifications:** Flutter Local Notifications
 
 ## Setup Instructions
-1. Clone the repository: `git clone [Your-Repo-Link]`
+1. Clone the repository: `git clone https://github.com/NoorMustafa4556/Task-Habit-Tracker-App-Flutter.git`
 2. Install dependencies: `flutter pub get`
 3. Run the app: `flutter run`
