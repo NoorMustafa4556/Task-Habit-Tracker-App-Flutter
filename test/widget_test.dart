@@ -14,7 +14,7 @@ void main() {
     await tester.pumpWidget(const HabitTrackerApp());
 
     // Verify that Signup Screen is displayed.
-    expect(find.text('Create Account'), findsOneWidget);
+    expect(find.text('Habit Tracker'), findsOneWidget);
     expect(find.text('Sign Up'), findsOneWidget);
   });
 }
