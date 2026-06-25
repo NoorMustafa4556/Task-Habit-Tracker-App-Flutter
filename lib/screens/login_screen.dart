@@ -15,6 +15,9 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _obscurePassword = true;
   final StorageService _storageService = StorageService();
 
+  String? _emailError;
+  String? _passwordError;
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -22,7 +25,38 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
+  bool _validate() {
+    setState(() {
+      _emailError = null;
+      _passwordError = null;
+    });
+
+    bool isValid = true;
+    final email = _emailController.text.trim();
+    final password = _passwordController.text;
+
+    if (email.isEmpty) {
+      setState(() => _emailError = "Email cannot be empty");
+      isValid = false;
+    } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email)) {
+      setState(() => _emailError = "Please enter a valid email address");
+      isValid = false;
+    }
+
+    if (password.isEmpty) {
+      setState(() => _passwordError = "Password cannot be empty");
+      isValid = false;
+    } else if (password != "noor123") {
+      setState(() => _passwordError = "Incorrect password (Hint: noor123)");
+      isValid = false;
+    }
+
+    return isValid;
+  }
+
   Future<void> _handleLogin() async {
+    if (!_validate()) return;
+
     String email = _emailController.text.trim();
 
     // Save login email to storage
@@ -97,9 +131,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           TextField(
                             controller: _emailController,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               labelText: "Email",
-                              prefixIcon: Icon(Icons.email_outlined),
+                              prefixIcon: const Icon(Icons.email_outlined),
+                              errorText: _emailError,
                             ),
                             keyboardType: TextInputType.emailAddress,
                           ),
@@ -109,6 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             decoration: InputDecoration(
                               labelText: "Password",
                               prefixIcon: const Icon(Icons.lock_outline),
+                              errorText: _passwordError,
                               suffixIcon: IconButton(
                                 icon: Icon(
                                   _obscurePassword

@@ -16,6 +16,10 @@ class _SignupScreenState extends State<SignupScreen> {
   bool _obscurePassword = true;
   final StorageService _storageService = StorageService();
 
+  String? _usernameError;
+  String? _emailError;
+  String? _passwordError;
+
   @override
   void dispose() {
     _usernameController.dispose();
@@ -24,7 +28,45 @@ class _SignupScreenState extends State<SignupScreen> {
     super.dispose();
   }
 
+  bool _validate() {
+    setState(() {
+      _usernameError = null;
+      _emailError = null;
+      _passwordError = null;
+    });
+
+    bool isValid = true;
+    final username = _usernameController.text.trim();
+    final email = _emailController.text.trim();
+    final password = _passwordController.text;
+
+    if (username.isEmpty) {
+      setState(() => _usernameError = "Username cannot be empty");
+      isValid = false;
+    }
+
+    if (email.isEmpty) {
+      setState(() => _emailError = "Email cannot be empty");
+      isValid = false;
+    } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email)) {
+      setState(() => _emailError = "Please enter a valid email address");
+      isValid = false;
+    }
+
+    if (password.isEmpty) {
+      setState(() => _passwordError = "Password cannot be empty");
+      isValid = false;
+    } else if (password.length < 6) {
+      setState(() => _passwordError = "Password must be at least 6 characters");
+      isValid = false;
+    }
+
+    return isValid;
+  }
+
   Future<void> _handleSignup() async {
+    if (!_validate()) return;
+
     String username = _usernameController.text.trim();
     String email = _emailController.text.trim();
 
@@ -100,17 +142,19 @@ class _SignupScreenState extends State<SignupScreen> {
                         children: [
                           TextField(
                             controller: _usernameController,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               labelText: "Username",
-                              prefixIcon: Icon(Icons.person_outline),
+                              prefixIcon: const Icon(Icons.person_outline),
+                              errorText: _usernameError,
                             ),
                           ),
                           const SizedBox(height: 16),
                           TextField(
                             controller: _emailController,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               labelText: "Email",
-                              prefixIcon: Icon(Icons.email_outlined),
+                              prefixIcon: const Icon(Icons.email_outlined),
+                              errorText: _emailError,
                             ),
                             keyboardType: TextInputType.emailAddress,
                           ),
@@ -120,6 +164,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             decoration: InputDecoration(
                               labelText: "Password",
                               prefixIcon: const Icon(Icons.lock_outline),
+                              errorText: _passwordError,
                               suffixIcon: IconButton(
                                 icon: Icon(
                                   _obscurePassword
