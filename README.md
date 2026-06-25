@@ -21,3 +21,13 @@ A cross-platform mobile application built with Flutter that helps users track th
 1. Clone the repository: `git clone https://github.com/NoorMustafa4556/Task-Habit-Tracker-App-Flutter.git`
 2. Install dependencies: `flutter pub get`
 3. Run the app: `flutter run`
+
+## Screenshots
+Here are the screenshots showing the lavish UI redesign and feature updates of the application:
+
+| Signup / Login & UI | Home & Settings Screens |
+| :---: | :---: |
+| ![Screenshot 1](assests/images/1.png) | ![Screenshot 2](assests/images/2.png) |
+| ![Screenshot 3](assests/images/3.png) | ![Screenshot 4](assests/images/4.png) |
+| ![Screenshot 5](assests/images/5.png) | ![Screenshot 6](assests/images/6.png) |
+| ![Screenshot 7](assests/images/7.png) | |
