@@ -37,6 +37,18 @@ class StorageService {
     return prefs.getString('theme_mode');
   }
 
+  // Save Habits List
+  Future<void> saveHabits(List<String> habits) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('habits', habits);
+  }
+
+  // Read Habits List
+  Future<List<String>?> getHabits() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList('habits');
+  }
+
   // Data Clear (Logout)
   Future<void> clearData() async {
     final prefs = await SharedPreferences.getInstance();
