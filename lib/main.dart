@@ -4,6 +4,7 @@ import 'screens/login_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/detail_screen.dart';
 import 'screens/settings_screen.dart';
+import 'screens/history_screen.dart';
 import 'services/storage_service.dart';
 
 // Global ValueNotifier to listen to theme changes dynamically
@@ -194,6 +195,7 @@ class HabitTrackerApp extends StatelessWidget {
             '/home': (context) => const HomeScreen(),
             '/details': (context) => const DetailScreen(),
             '/settings': (context) => const SettingsScreen(),
+            '/history': (context) => const HistoryScreen(),
           },
         );
       },
