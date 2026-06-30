@@ -9,6 +9,7 @@ A cross-platform mobile application built with Flutter that helps users track th
 - **Notifications:** Integrated local notifications to remind users of their habits.
 - **Modern UI:** Built using Material 3 design principles.
 
+
 ## Tech Stack
 - **Framework:** Flutter
 - **Language:** Dart
