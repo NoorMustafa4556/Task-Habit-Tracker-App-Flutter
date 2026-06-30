@@ -2,7 +2,6 @@
 
 A cross-platform mobile application built with Flutter that helps users track their daily habits and stay motivated with real-time quotes.
 
-
 ## Features
 - **User Authentication:** Secure Signup and Login screens.
 - **Dynamic Content:** Fetches daily motivational quotes from an external API (dummyjson.com).
